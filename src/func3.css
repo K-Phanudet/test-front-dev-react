@@ -1,0 +1,22 @@
+.send-array{
+
+}
+.row{
+    display: flex;
+    justify-content: space-around;
+}
+.result-func3{
+    display: flex;
+    flex-direction: column;
+}
+.row *{
+    width: 30vw;
+}
+.func{
+    width: 40vw;
+}
+
+.result-func3 *{
+    font-family: "Gill Sans", sans-serif;   
+    font-size: 15px;
+}

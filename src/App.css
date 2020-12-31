@@ -1,0 +1,31 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  margin: 0px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  align-items: center;
+}
+.header-bar {
+  width: 90vw;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: 	rgb(113, 128, 150);
+  color: white;
+  font-size: 30px;
+}
+*{
+  font-family: "Dobra"; 
+}
+
+@import url(//db.onlinewebfonts.com/c/30451b55e1338d7cebadbc45197939a3?family=Dobra);
+
+@font-face {
+  font-family: "Dobra"; 
+  src: url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.eot"); 
+  src: url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.eot?#iefix") format("embedded-opentype")
+  , url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.woff") format("woff")
+  , url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.ttf") format("truetype")
+  , url("//db.onlinewebfonts.com/t/30451b55e1338d7cebadbc45197939a3.svg#Dobra") format("svg"); }

@@ -1,0 +1,132 @@
+#form-Valid{
+    background-color: 	rgb(203, 213, 224);
+    padding: 30px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 15px;
+    color: 	rgb(44, 62, 80);
+}
+
+.result{
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+.result.hiden-result{
+    display: none;
+}
+.result-content{
+    font-style: normal;
+}
+.Title-form{
+    font-size: 22px;
+}
+.sub-input{
+    padding: 0%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    height: auto;
+}
+.error-form{
+    margin-right: auto;
+    margin-left: 0%;
+    margin-top: 5px;
+    font-family: 'Roboto';
+    font-style: italic;
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+.error-form.error-active{
+    display: inline;
+}
+select{
+    width: 100%;
+    height: 35px;
+    padding: 3px 5px;
+    border: 2px solid rgb(236, 236, 236);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+}
+.sub-input input{
+    width: 100%;
+    height: 35px;
+    padding: 3px 5px;
+    border: 2px solid rgb(236, 236, 236);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    margin: 0%;
+}
+.form-input{
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title-input{
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.form-input .button-submit{
+    width: 65%;
+    height: 35px;
+    padding: 0px;
+    box-sizing: border-box;
+    margin-left: auto;
+}
+#submit{
+    width: 65px;
+    height: 35px;
+    padding: 3px 5px;
+    margin: 0px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    background-color: 	rgb(105, 200, 155);
+    outline:none;
+
+}
+@media only screen and (max-width: 1250px) {
+    .form-input {
+        flex-direction: column;
+    }
+    .form-input label{
+        margin-right: auto;
+        margin-left: 0%;
+    }
+    input,select,.form-input div{
+        width: 100%;
+    }
+    .form-input div{
+        display: flex;
+        justify-content: center;
+    }
+    .form-input .button-submit{
+        width: 100%;
+        height: 35px;
+        margin: auto;
+    }
+  }
+  input,select{
+      font-family: 'Roboto';
+  }
+  input:focus{
+    border: 2px solid rgb(114, 114, 114);
+    border-radius: 5px;
+  }

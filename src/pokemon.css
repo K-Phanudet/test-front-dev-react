@@ -1,0 +1,45 @@
+.wrap-pokemon , .wrap-card{
+width: 1200px;
+height: auto;
+background-color:rgb(226, 232, 240);
+box-sizing: border-box;
+border-radius: 15px;
+}
+
+.wrap-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card{
+    background-color: rgb(209, 218, 228);
+    width: 120px;
+    height: 140px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 25px;
+}
+.card .wrap-img{
+    background-color: rgb(228, 233, 238);
+    border-radius: 50%;
+    width: 100px;
+    margin-top: 5px;
+}
+.card .img-label{
+    background-color:rgb(177, 188, 204);
+    width: 80px;
+    border-radius: 5px;
+    text-align: center;
+    height: 20px;
+    margin-top: 5px;
+}
+.wrap-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.card span{
+    margin: 2.5px 0px 0px 0px ;
+}

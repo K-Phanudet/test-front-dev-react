@@ -1,0 +1,22 @@
+.func{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(226, 232, 240);
+    width: 30vw;height: 30vh;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius:15px;
+   
+}
+.sub-result{
+    display: flex;
+    flex-direction: row;
+   
+}
+.sub-result label{
+    font-family: "Gill Sans", sans-serif;   
+    font-size: 15px;
+}
+.result-name{
+    width: 150px;
+}
