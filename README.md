@@ -1,3 +1,6 @@
+##HOST
+https://examfrontdevphanudet.herokuapp.com/
+
 ## Requirement
 
 1. สร้าง form และ validate ข้อมูล
