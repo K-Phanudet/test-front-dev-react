@@ -31,7 +31,7 @@ export default class home extends Component {
                         }
                     }
                 }
-                console.log(`AA : ${tmp_first_max}   BB:: ${tmp_sec_max}`)
+                //console.log(`AA : ${tmp_first_max}   BB:: ${tmp_sec_max}`)
                 if (tmp_sec_max == null) {
                     return 'null'
                 } else {

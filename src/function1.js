@@ -26,7 +26,7 @@ export default class home extends Component {
         for (let i = 0; i < datas.length; i++) {
             results.push({ name: datas[i].name, totalSubProductWeight: datas[i].totalSubProductWeight })
         }
-        console.log(results)
+        //console.log(results)
         return (results.map((result) => (
             <div className="sub-result">
                 <label className="result-name">Name : {result.name}</label>

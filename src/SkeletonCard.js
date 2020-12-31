@@ -9,7 +9,7 @@ const boxCards = (num) => {
     for (let i = 0; i < row; i++) {
         subItem = []
         for (let j = 0; j < 6; j++) {
-            console.log(`Count : ${count} && ${j}`)
+            //console.log(`Count : ${count} && ${j}`)
             if (count < num) {
                 subItem.push(<div className='card'>
                     <Skeleton className="wrap-img" circle={true} className='card' duration={1} height={100} width={100} />
@@ -25,7 +25,7 @@ const boxCards = (num) => {
         }
         Item.push(<div className="wrap-row">{subItem}</div>)
 
-    } console.log(Item)
+    } //console.log(Item)
     return Item
 }
 const SkeletonCard = () => {
