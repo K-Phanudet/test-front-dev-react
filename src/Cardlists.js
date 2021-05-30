@@ -10,7 +10,6 @@ const boxCards = (list)=>{
     for(let i = 0;i<row;i++){
         subItem=[]
         for(let j =0;j<6;j++){
-            //console.log(`Count : ${count} && ${j}`)
             if(count<list.length){
                 subItem.push(<Card key={count} item={list[count]} />)
             }else{
@@ -18,21 +17,13 @@ const boxCards = (list)=>{
             }
             count+=1
         }
-        Item.push(<div className="wrap-row">{subItem}</div>)
-        
-    } //console.log(Item)
+        Item.push(<div className="wrap-row" key={`card-row-${i}`}>{subItem}</div>)  
+    } 
     return Item
 }
 const Cardlists = ({list}) =>{
-    //console.log(list.length)
-    
     return (
         <div className="wrap-card">
-           {/* {
-           list.map((item,index)=>{
-               return <Card key={index} item={item} />
-            })
-           } */}
            {boxCards(list)}
         </div>
     )

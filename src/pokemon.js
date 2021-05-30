@@ -4,48 +4,35 @@ import axios from 'axios'
 import Skeletoncard from './SkeletonCard'
 import './pokemon.css'
 const Pokemon= () =>{
-    const dataAPI = []
-    const [isLoading,setisLoading] = useState(false);
-    const [pokemonsJSON,setpokemonsJSON] = useState(dataAPI);
-    
+    const [isLoading,setIsLoading] = useState(false);
+    const [pokemonJSON,setPokemonJSON] = useState([]);
     useEffect(()=>{
-        setisLoading(true)
+        setIsLoading(true)
         const fetchData = async (numId) =>{
             try{
-                
                const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${numId}`)
-               const respone = JSON.parse(JSON.stringify(data))
-               return {id:numId,name:respone.data.name,picture:respone.data.sprites.front_default}
-           
+               const response = JSON.parse(JSON.stringify(data))
+               return {id:numId,name:response.data.name,picture:response.data.sprites.front_default}
             }catch(error){
                 console.error(error)
             }
         }
-        
-        const forloop = async ()=>{
-            
+        const setData = async ()=>{
+            const fetchAPIs = []
             for(let i = 1;i<=104;i++){
-                const result = await fetchData(i)
-                dataAPI.push(result)
-                //console.log(dataAPI)
-                
+                fetchAPIs.push(fetchData(i))
             }
-            setpokemonsJSON(dataAPI)
-            //console.log(pokemonsJSON)
-            setisLoading(false)
+            await Promise.all(fetchAPIs).then(val=>setPokemonJSON(val))
+            setIsLoading(false)
         }
-
-
-        forloop()
-        
-        
+        setData()
+        return (setPokemonJSON([]))
     },[])
     return (
         <div className="wrap-pokemon">
-            {!isLoading && <Cardlists list={pokemonsJSON}/>}
+            {!isLoading && <Cardlists list={pokemonJSON}/>}
             {isLoading && <Skeletoncard/>}
         </div>
     )
-
 }
 export default Pokemon;

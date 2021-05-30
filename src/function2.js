@@ -1,29 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './func2.css'
 
-export default class home extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-
-        }
-    }
-    DateTimefunction(dateTimeString){
-        let unixTimeStamp = Date.parse(dateTimeString)/1000
-        let year = new Date(dateTimeString).getFullYear()
-        let month = ("0"+(new Date(dateTimeString).getMonth()+1)).slice(-2)
-        let day = ("0"+(new Date(dateTimeString).getDate())).slice(-2)
-        let dayOfDate = new Date(year,month,0).getDate()
+export default ()=>{
+    const  addZeroLead = (number)=>number<9?`0${number}`:number
+    const dateTimeFunction= (dateTimeString)=>{
+        let dateTime = new Date(dateTimeString)
+        let unixTimeStamp = dateTime/1000
+        let year = dateTime.getFullYear()
+        let month = addZeroLead(dateTime.getMonth()+1)
+        let day = addZeroLead(dateTime.getDate())
+        let dayOfDate = addZeroLead(new Date(year,month,0).getDate())
         let quarter = Math.ceil(month / 3)
         let thaiDate = new Date(dateTimeString).toLocaleString('th-TH',{
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          })
-        let minute = ("0"+(new Date(dateTimeString).getMinutes())).slice(-2)
-        let hour = ("0"+(new Date(dateTimeString).getHours()+1)).slice(-2)
-          return (  <div className="result-func2">
+        })
+        let minute = addZeroLead(dateTime.getMinutes())
+        let hour = addZeroLead(dateTime.getHours())
+        return (  <div className="result-func2">
                         <label>{day}/{month}/{year}   {hour}:{minute}</label>
                         <div className='sub-label'>
                                 <label>{thaiDate} </label><label className="des">รูปแบบปฏิทินไทย</label>
@@ -39,12 +34,11 @@ export default class home extends Component {
                         </div>
                     </div>)
     }
-    render() {
         return (
             <div className="func">
+                <h4>Raw data : 2020-08-10T14:54:52+07:00</h4>
                 <h3>Result</h3>
-                {this.DateTimefunction("2020-08-10T14:54:52+07:00")}
+                {dateTimeFunction("2020-08-10T14:54:52+07:00")}
             </div>
         )
-    }
 }

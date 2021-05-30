@@ -1,52 +1,39 @@
-import React, { Component } from 'react'
+import React, { useState} from 'react'
 import './home.css'
-
-export default class home extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            fname: "",
-            lname: "",
+export default ()=> {
+     const [state,setState] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        verifyPassword: "",
+        gender: "",
+        resultClassName: ['result', 'hiden-result'],
+        error: {
+            firstName: "",
+            lastName: "",
             email: "",
-            passwd: "",
-            verifypasswd: "",
-            gender: "",
-            resultClassName: ['result', 'hiden-result'],
-            error: {
-                fname: "",
-                lname: "",
-                email: "",
-                passwd: "",
-                verifypasswd: "",
-                gender: ""
-            },
-            classNameErr: {
-                fname: ['error-form'],
-                lname: ['error-form'],
-                email: ['error-form'],
-                passwd: ['error-form'],
-                verifypasswd: ['error-form'],
-                gender: ['error-form']
-            }
-
-
+            password: "",
+            verifyPassword: "",
+            gender: ""
+        },
+        classNameErr: {
+            firstName: ['error-form'],
+            lastName: ['error-form'],
+            email: ['error-form'],
+            password: ['error-form'],
+            verifyPassword: ['error-form'],
+            gender: ['error-form']
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.validForm = this.validForm.bind(this)
+    })
+    const handleChange = (event)=> {
+        const {name,value} = event.target
+        setState(prevState=>({ ...prevState,[name]:value }))
     }
-    handleChange(event) {
-        const name = event.target.name
-        this.setState({ [name]: event.target.value })
-       
-    }
-    validEmail(email) {
-        let statusErr = false
+    const validEmail = (email) => {
         let validator = require("email-validator");
-
-        if (email === null || email === '') {
-            statusErr = true
-            this.setState((state) => ({
+        if (!email) {
+            setState((state) => ({...state,
                 error: {
                     ...state.error
                     , email: 'Please fill out this field'
@@ -56,40 +43,36 @@ export default class home extends Component {
                     , email: ['error-form', 'error-active']
                 }
             }))
-        } else {
-            if (!validator.validate(email)) {
-                statusErr = true
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , email: 'Invalid email format,please fill out this field again'
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , email: ['error-form', 'error-active']
-                    }
-                }))
-            } else {
-                statusErr = false
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , email: ''
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , email: ['error-form']
-                    }
-                }))
+            return true
+        } 
+        if (!validator.validate(email)) {
+            setState((state) => ({...state,
+                error: {
+                    ...state.error
+                    , email: 'Invalid email format,please fill out this field again'
+                },
+                classNameErr: {
+                    ...state.classNameErr
+                    , email: ['error-form', 'error-active']
+                }
+            }))
+            return true
+        } 
+        setState((state) => ({...state,
+            error: {
+                ...state.error
+                , email: ''
+            },
+            classNameErr: {
+                ...state.classNameErr
+                , email: ['error-form']
             }
-        }
-        return statusErr
+        }))
+        return false
     }
-    validBlankfileld(data, nameState) {
-        let statusErr = false
-        if (data === null || data === '') {
-            statusErr = true
-            this.setState((state) => ({
+    const validBlankField = (data, nameState)=>{
+        if (!data) {
+            setState((state) => ({...state,
                 error: {
                     ...state.error
                     , [nameState]: 'Please fill out this field'
@@ -99,187 +82,153 @@ export default class home extends Component {
                     , [nameState]: ['error-form', 'error-active']
                 }
             }))
-        } else {
-            statusErr = false
-            this.setState((state) => ({
+            return true
+        } 
+        setState((state) => ({...state,
+            error: {
+                ...state.error
+                , [nameState]: ''
+            },
+            classNameErr: {
+                ...state.classNameErr
+                , [nameState]: ['error-form']
+            }
+        }))
+        return  false
+    }
+    const validPassword=(password, verifyPassword) =>{
+        if (verifyPassword !== password) {
+            setState((state) => ({...state,
                 error: {
                     ...state.error
-                    , [nameState]: ''
+                    , verifyPassword: 'Passwords do not match'
+                    , password: 'Passwords do not match'
                 },
                 classNameErr: {
                     ...state.classNameErr
-                    , [nameState]: ['error-form']
+                    , verifyPassword: ['error-form', 'error-active']
+                    , password: ['error-form', 'error-active']
                 }
             }))
-
+            return true
         }
-        return statusErr
-    }
-    validPassword(passwd, verifypasswd) {
-        let statusErr = false
-        if (verifypasswd !== passwd && verifypasswd !== '' && passwd !== ''
-            && verifypasswd !== null && passwd !== null) {
-            statusErr = true
-            this.setState((state) => ({
+        if (!password || !verifyPassword) {
+            let errPassword = !password ? 'Please fill out this field' : ''
+            let errVerifyPassword = !verifyPassword ? 'Please fill out this field' : ''
+            let classPassword = !password ? ['error-form', 'error-active'] : ['error-form']
+            let classVerifyPassword = !verifyPassword ? ['error-form', 'error-active'] : ['error-form']
+            setState((state) => ({...state,
                 error: {
                     ...state.error
-                    , verifypasswd: 'Passwords do not match'
-                    , passwd: 'Passwords do not match'
+                    , password: errPassword
+                    , verifyPassword: errVerifyPassword
                 },
                 classNameErr: {
                     ...state.classNameErr
-                    , verifypasswd: ['error-form', 'error-active']
-                    , passwd: ['error-form', 'error-active']
+                    , password: classPassword
+                    , verifyPassword: classVerifyPassword
                 }
             }))
-        } else {
-            if (passwd === null || passwd === '') {
-                statusErr = true
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , passwd: 'Please fill out this field'
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , passwd: ['error-form', 'error-active']
-                    }
-                }))
-            } else {
-                statusErr = false
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , passwd: ''
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , passwd: ['error-form']
-                    }
-                }))
-            }
-            if (verifypasswd === null || verifypasswd === '') {
-                statusErr = true
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , verifypasswd: 'Please fill out this field'
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , verifypasswd: ['error-form', 'error-active']
-                    }
-                }))
-            } else {
-                statusErr = false
-                this.setState((state) => ({
-                    error: {
-                        ...state.error
-                        , verifypasswd: ''
-                    },
-                    classNameErr: {
-                        ...state.classNameErr
-                        , verifypasswd: ['error-form']
-                    }
-                }))
-            }
-
+            return true
         }
-
-
-
-        return statusErr
+        setState((state) => ({...state,
+            error: {
+                ...state.error
+                , password: '',
+                verifyPassword: ''
+            },
+            classNameErr: {
+                ...state.classNameErr
+                , password: ['error-form']
+                , verifyPassword: ['error-form']
+            }
+        }))
+        return false
     }
 
-    validForm() {
+    const validForm = () => {
         let err = []
-        err.push(this.validEmail(this.state.email))
-        err.push(this.validBlankfileld(this.state.fname, 'fname'))
-        err.push(this.validBlankfileld(this.state.fname, 'lname'))
-        err.push(this.validBlankfileld(this.state.gender, 'gender'))
-        err.push(this.validPassword(this.state.passwd, this.state.verifypasswd))
-
-        if (err.indexOf(true) < 0) {
-            this.setState({
+        err.push(validEmail(state.email))
+        err.push(validBlankField(state.firstName, 'firstName'))
+        err.push(validBlankField(state.lastName, 'lastName'))
+        err.push(validBlankField(state.gender, 'gender'))
+        err.push(validPassword(state.password, state.verifyPassword))
+        if (err.every(val=>val===false)) {
+            setState(prev=>({...prev,
                 resultClassName: ['result']
-            })
+            }))
         } else {
-            this.setState({
+            setState(prev=>({...prev,
                 resultClassName: ['result', 'hiden-result']
-            })
+            }))
         }
-
-
     }
-
-    render() {
-        return (
+    return (
             <div>
                 <form id="form-Valid" >
                     <label className="Title-form">Test form and validation</label>
                     <div className="first-name form-input">
                         <label className="title-input">First Name</label>
                         <div className="sub-input">
-                            <input type="text" id="fname" name="fname" placeholder="Please fill first name" onChange={this.handleChange} />
-                            <label className={this.state.classNameErr.fname.join(' ')}>{this.state.error.fname}</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Please fill first name" onChange={handleChange} />
+                            <label className={state.classNameErr.firstName.join(' ')}>{state.error.firstName}</label>
                         </div>
                     </div>
                     <div className="Last-name form-input">
                         <label className="title-input">Last Name</label>
                         <div className="sub-input">
-                            <input type="text" id="lname" name="lname" placeholder="Please fill last name" onChange={this.handleChange} />
-                            <label className={this.state.classNameErr.lname.join(' ')}>{this.state.error.lname}</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Please fill last name" onChange={handleChange} />
+                            <label className={state.classNameErr.lastName.join(' ')}>{state.error.lastName}</label>
                         </div>
                     </div>
                     <div className="E-mail form-input">
                         <label className="title-input">E-mail</label>
                         <div className="sub-input">
-                            <input type="text" id="email" name="email" placeholder="Please fill email" onChange={this.handleChange} />
-                            <label className={this.state.classNameErr.email.join(' ')}>{this.state.error.email}</label>
+                            <input type="text" id="email" name="email" placeholder="Please fill email" onChange={handleChange} />
+                            <label className={state.classNameErr.email.join(' ')}>{state.error.email}</label>
                         </div>
                     </div>
                     <div className="Password form-input">
                         <label className="title-input">Password</label>
                         <div className="sub-input">
-                            <input type="password" id="passwd" name="passwd" placeholder="Please fill password" onChange={this.handleChange} />
-                            <label className={this.state.classNameErr.passwd.join(' ')}>{this.state.error.passwd}</label>
+                            <input type="password" id="password" name="password" placeholder="Please fill password" onChange={handleChange} />
+                            <label className={state.classNameErr.password.join(' ')}>{state.error.password}</label>
                         </div>
                     </div>
                     <div className="Verify-Password form-input">
                         <label className="title-input">Verify Password</label>
                         <div className="sub-input">
-                            <input type="password" id="verifypasswd" name="verifypasswd" placeholder="Please fill verify password" onChange={this.handleChange} />
-                            <label className={this.state.classNameErr.verifypasswd.join(' ')}>{this.state.error.verifypasswd}</label>
+                            <input type="password" id="verifyPassword" name="verifyPassword" placeholder="Please fill verify password" onChange={handleChange} />
+                            <label className={state.classNameErr.verifyPassword.join(' ')}>{state.error.verifyPassword}</label>
                         </div>
                     </div>
                     <div className="gender form-input">
                         <label className="title-input">Gender</label>
                         <div className="sub-input">
-                            <select name="gender" id="gender" onChange={this.handleChange}>
-                                <option value="" disabled selected>Please select a gender</option>
+                            <select name="gender" id="gender" value="" onChange={handleChange}>
+                                <option value="" >Please select a gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Rather Not Say">Rather not say</option>
                             </select>
-                            <label className={this.state.classNameErr.gender.join(' ')}>{this.state.error.gender}</label>
+                            <label className={state.classNameErr.gender.join(' ')}>{state.error.gender}</label>
                         </div>
                     </div>
                     <div className="form-input">
 
                         <div className="button-submit">
-                            <button id="submit" type="button" onClick={this.validForm} >Submit</button>
+                            <button id="submit" type="button" onClick={validForm} >Submit</button>
                         </div>
                     </div>
-                    <div id="result" className={this.state.resultClassName.join(' ')}>
+                    <div id="result" className={state.resultClassName.join(' ')}>
                         <label className="result-title">Result:</label>
-                        <label className="result-content">First Name : {this.state.fname}</label>
-                        <label className="result-content">Last Name : {this.state.lname}</label>
-                        <label className="result-content">E-mail : {this.state.email}</label>
-                        <label className="result-content">Gender : {this.state.gender}</label>
+                        <label className="result-content">First Name : {state.firstName}</label>
+                        <label className="result-content">Last Name : {state.lastName}</label>
+                        <label className="result-content">E-mail : {state.email}</label>
+                        <label className="result-content">Gender : {state.gender}</label>
                     </div>
                 </form>
 
             </div>
         )
-    }
 }

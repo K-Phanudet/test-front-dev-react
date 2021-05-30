@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { NavLink  } from 'react-router-dom'
 import './nav.css'
 
 
-export default class Navbar extends Component {
-
-
-  render() {
+export default ()=>{
     return (
-
-      
         <nav className="navbar">
             <NavLink exact to="/" activeClassName="active" className="navbar-item">
                 Home
@@ -29,5 +24,4 @@ export default class Navbar extends Component {
         </nav>
       
     )
-  }
 }
